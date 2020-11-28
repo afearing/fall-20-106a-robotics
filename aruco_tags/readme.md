@@ -16,5 +16,11 @@
 1. Export the mesh as a .dae file. You might have to set the axes to align with Gazebo defaults (Gazebo uses a right-hand coordinate system where +Z is up (vertical), +X is forward (into the screen), and +Y is to the left)
 1. Follow this guide for how to start Gazebo with a custom world file. IDK how to do gazebo_ros though
    - http://gazebosim.org/tutorials/?tut=import_mesh
+
+
 - `roslaunch turtlebot_gazebo turtlebot_world.launchworld_file:=$./worlds/room.world` this doesn't seem to work
 
+# to do
+- figure out roslaunch `.launch` vs `.world`
+- What is a URDF? Xacro is newer. Supposed to be more reusable
+- how to use ros with gazebo and add the tag?
