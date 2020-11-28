@@ -26,3 +26,5 @@
 - figure out roslaunch `.launch` vs `.world`
 - What is a URDF? Xacro is newer. Supposed to be more reusable
 - how to use ros with gazebo and add the tag?
+- install aruco ros package
+- setup worlds with tags, baxter, and humanoid
