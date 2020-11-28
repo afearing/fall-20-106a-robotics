@@ -6,6 +6,8 @@
   - Video on setting up AR tags
 - https://artisticrender.com/how-to-add-a-texture-to-an-object-in-blender/
   - Tutorial on UV texture mapping in Blender
+- http://wiki.ros.org/aruco_detect
+  - Maybe use aruco instead of alvar? better documentation and i know how.
 # steps
 1. Install `ar_track_alvar`. Use use `sudo apt-get update` then `sudo apt-get install ros-indigo-ar-track-alvar`
    - http://wiki.ros.org/ar_track_alvar
