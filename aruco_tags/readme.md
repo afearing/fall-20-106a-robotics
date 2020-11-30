@@ -24,8 +24,9 @@
 
 # trying out gazebo worlds
 1. create a package for the world launch `catkin_create_pkg arucobaxter_gazebo rospy roscpp std_msgs geometry_msgs gazebo_ros`
-
+`roslaunch arucobaxter_gazebo arucobaxter.launch`
 - `roslaunch turtlebot_gazebo turtlebot_world.launchworld_file:=$./worlds/room.world` this doesn't seem to work
+```rosrun gazebo_ros spawn_model -file `rospack find aruco_planning`/src/baxter.urdf -urdf -z 1 -model baxter```
 
 # to do
 - figure out roslaunch `.launch` vs `.world`
