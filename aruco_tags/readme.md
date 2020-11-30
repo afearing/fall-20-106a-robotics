@@ -20,6 +20,10 @@
    - http://gazebosim.org/tutorials/?tut=import_mesh
 
 
+
+# trying out gazebo worlds
+1. create a package for the world launch `catkin_create_pkg arucobaxter rospy roscpp std_msgs geometry_msgs gazebo_ros`
+
 - `roslaunch turtlebot_gazebo turtlebot_world.launchworld_file:=$./worlds/room.world` this doesn't seem to work
 
 # to do
