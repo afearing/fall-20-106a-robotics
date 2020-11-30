@@ -19,10 +19,11 @@
 1. Follow this guide for how to start Gazebo with a custom world file. IDK how to do gazebo_ros though
    - http://gazebosim.org/tutorials/?tut=import_mesh
 
-
+1. https://gist.github.com/RDaneelOlivav/990addc733fbeb8549c3979d5bca41b2
+   - gist for ar tag stuff
 
 # trying out gazebo worlds
-1. create a package for the world launch `catkin_create_pkg arucobaxter rospy roscpp std_msgs geometry_msgs gazebo_ros`
+1. create a package for the world launch `catkin_create_pkg arucobaxter_gazebo rospy roscpp std_msgs geometry_msgs gazebo_ros`
 
 - `roslaunch turtlebot_gazebo turtlebot_world.launchworld_file:=$./worlds/room.world` this doesn't seem to work
 
