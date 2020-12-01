@@ -13,7 +13,7 @@
       <link name="body">
         <visual name="visual">
           <geometry>
-            <mesh><uri>file://artag1xfor.dae</uri></mesh>
+            <mesh><uri>$(find aruco_planning)/worlds/artag1xfor.dae</uri></mesh>
           </geometry>
         </visual>
       </link>
