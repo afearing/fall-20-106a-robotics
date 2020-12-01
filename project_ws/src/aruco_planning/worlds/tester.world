@@ -128,13 +128,13 @@
     </model>
     <model name="aruco_tag">
       <!-- <static>1</static> -->
-      <pose>0 0 2  0 0 0</pose>
+      <pose>0.7 0 0.7  0 0 0</pose>
       <static>true</static>
       <link name="body">
         <visual name="visual">
           <geometry>
             <mesh>
-              <uri>model://aruco_tag/meshes/artag1xfor.dae</uri>
+              <uri>model://aruco_tag/meshes/arucotag1.dae</uri>
             </mesh>
           </geometry>
         </visual>
