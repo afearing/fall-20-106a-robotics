@@ -29,7 +29,8 @@ def main():
 
     # Make sure that you've looked at and understand path_planner.py before starting
 
-    planner = PathPlanner("right_arm")
+    plannerRight = PathPlanner("right_arm")
+    plannerLeft = PathPlanner("left_arm")
 
 	# K values for Part 5
     Kp = 0.1 * np.array([0.3, 2, 1, 1.5, 2, 2, 3]) # Borrowed from 106B Students
@@ -64,8 +65,9 @@ def main():
     # orien_const.absolute_z_axis_tolerance = 0.1;
     # orien_const.weight = 1.0;
     control1 = Controller(Kp, Ki, Kd, Kw, Limb("right"))
+    control2 = Controller(Kp, Ki, Kd, Kw, Limb("left"))
 
-    def move_to_goal(x, y, z, orien_const=[], or_x=0.0, or_y=-1.0, or_z=0.0, or_w=0.0):
+    def move_to_goal(x, y, z, controller, planner, orien_const=[], or_x=0.0, or_y=-1.0, or_z=0.0, or_w=0.0):
         while not rospy.is_shutdown():
             try:
                 goal = PoseStamped()
@@ -86,7 +88,7 @@ def main():
                 raw_input("Press <Enter> to move the right arm to goal pose: ")
 
                 # Might have to edit this for part 5
-                if not control1.execute_plan(plan):
+                if not controller.execute_plan(plan):
                     raise Exception("Execution failed")
             except Exception as e:
                 print e
@@ -97,10 +99,14 @@ def main():
     while not rospy.is_shutdown():
 
     # Set your goal positions here
-    	move_to_goal(0.47, -0.85, 0.07)
-        move_to_goal(0.6, -0.3, 0.0)
-        move_to_goal(0.6, -0.1, 0.1)
+        move_to_goal(0.3,0.5,0,control2, plannerLeft)
+    	move_to_goal(0.47, -0.85, 0.07, control1, plannerRight)
+        move_to_goal(0.6, -0.3, 0.0, control1, plannerRight)
+        move_to_goal(0.6, -0.1, 0.1, control1, plannerRight)
+
+        #Set the left hand pos
     control1.shutdown()
+    control2.shutdown()
 
         
 
