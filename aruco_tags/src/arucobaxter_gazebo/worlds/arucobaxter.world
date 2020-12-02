@@ -7,10 +7,19 @@
     <include>
       <uri>model://sun</uri>
     </include>
-    <include>
-      <uri>model://double_pendulum_with_base</uri>
-      <name>double_pendulum_with_base</name>
-      <pose>-2.0 7.0 0 0 0 0</pose>
-    </include>
+    <model name="aruco_tag">
+      <!-- <static>1</static> -->
+      <pose>0.7 0 0.7  0 0 0</pose>
+      <static>true</static>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>model://aruco_tag/meshes/arucotag1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+    </model>
   </world>
 </sdf>
