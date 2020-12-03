@@ -264,6 +264,8 @@ class Controller(object):
 
         u = u_ff + np.dot(error, self._Kp) + np.dot(ed, self._Kd) + np.dot(self._IntError, self._Ki)
 
+        # u = u_ff + np.dot(self._Kp, error) + np.dot(self._Ki, self._IntError) + np.dot(self._Kd, ed)
+
         ###################### YOUR CODE END ##########################
 
         return u

@@ -21,6 +21,8 @@ from path_planner import PathPlanner
 # Uncomment this line for part 5 of Lab 5
 from controller import Controller
 
+import tf2_ros
+
 
 def main():
     """
@@ -66,6 +68,16 @@ def main():
     # orien_const.weight = 1.0;
     control1 = Controller(Kp, Ki, Kd, Kw, Limb("right"))
     control2 = Controller(Kp, Ki, Kd, Kw, Limb("left"))
+
+    # tfBuffer = tf2_ros.Buffer()
+	# tfListener = tf2_ros.TransformListener(tfBuffer)
+	# rate = rospy.Rate(1.0)
+	# # while not rospy.is_shutdown():
+    # try:
+    #     trans = tfBuffer.lookup_transform(targetFrame, referenceFrame, rospy.Time())
+    # except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
+    #     rate.sleep()
+    #     continue
 
     def move_to_goal(x, y, z, controller, planner, orien_const=[], or_x=0.0, or_y=-1.0, or_z=0.0, or_w=0.0):
         while not rospy.is_shutdown():
