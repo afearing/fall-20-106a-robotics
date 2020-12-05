@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>forward_kinematics</name>
+  <name>fwd_kinematics</name>
   <version>0.0.0</version>
-  <description>The forward_kinematics package</description>
+  <description>The fwd_kinematics package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

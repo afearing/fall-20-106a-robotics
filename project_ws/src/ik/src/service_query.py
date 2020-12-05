@@ -11,6 +11,7 @@ def main():
     #Create the function used to call the service
     compute_ik = rospy.ServiceProxy('compute_ik', GetPositionIK)
     pub = rospy.Publisher('service_query/kin', JointState, queue_size=10)
+    rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         user_input_str = raw_input('Press enter to compute an IK solution:')
         
@@ -18,7 +19,7 @@ def main():
         request = GetPositionIKRequest()
         request.ik_request.group_name = "left_arm"
         request.ik_request.ik_link_name = "left_hand"
-        request.ik_request.attempts = 200
+        request.ik_request.attempts = 20
         request.ik_request.pose_stamped.header.frame_id = "base"
         
         #YOUR CODE HERE
@@ -40,10 +41,10 @@ def main():
         try:
             #Send the request to the service
             response = compute_ik(request)
+            pub.publish(response.solution.joint_state)
             
             #Print the response HERE
             print(response)
-            pub.publish(response.solution.joint_state)
 
         except rospy.ServiceException, e:
             print "Service call failed: %s"%e
