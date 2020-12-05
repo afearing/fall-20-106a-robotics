@@ -25,16 +25,64 @@ from path_planner import PathPlanner
 # Uncomment this line for part 5 of Lab 5
 from controller import Controller
 import tf2_ros
+import tf2_geometry_msgs
 
 
 # Callback function to subscribe to images
 def fiducial_callback(fiducial_tfArray):
-    vector3 = fiducial_tfArray.transforms[0].transform.translation
-    print("lengthOfFiducial: ", len(fiducial_tfArray.transforms))
-    print("x,y,z: ", vector3.x, " ", vector3.y, " ", vector3.z)
-    control(vector3.x, vector3.y, vector3.z)
+    tfBuffer1 = tf2_ros.Buffer()
+    listener = tf2_ros.TransformListener(tfBuffer1)
 
-def control(x_in, y_in, z_in):
+    vector3 = fiducial_tfArray.transforms[0].transform.translation
+    quaternion = fiducial_tfArray.transforms[0].transform.rotation
+
+    camera_pose = PoseStamped()
+    camera_pose.header.frame_id = "head_camera"
+    #x, y, and z position
+    camera_pose.pose.position.x = vector3.x
+    camera_pose.pose.position.y = vector3.y
+    camera_pose.pose.position.z = vector3.z
+
+    #Orientation as a quaternion
+    camera_pose.pose.orientation.x = quaternion.x
+    camera_pose.pose.orientation.y = quaternion.y
+    camera_pose.pose.orientation.z = quaternion.z
+    camera_pose.pose.orientation.w = quaternion.w
+
+    # listener.waitForTransform()
+    trans, rot = 0, 0
+    aruco_pose = 0
+    rate = rospy.Rate(1)
+    while not rospy.is_shutdown(): 
+        try:
+            trans = tfBuffer1.lookup_transform("base", "head_camera", rospy.Time())
+        except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
+            rate.sleep()
+            continue
+        break
+    print("transform: ", trans)
+    while not rospy.is_shutdown(): 
+        try:
+            aruco_pose = tf2_geometry_msgs.do_transform_pose(camera_pose, trans)
+        except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
+            rate.sleep()
+            continue
+        break
+    print("pose: ", aruco_pose)
+    aruco_tag_posX = aruco_pose.pose.position.x - 0.74
+    aruco_tag_posY = -aruco_pose.pose.position.y
+    aruco_tag_posZ = aruco_pose.pose.position.z - 0.104
+
+    aruco_tag_rotX = aruco_pose.pose.orientation.x
+    aruco_tag_rotY = aruco_pose.pose.orientation.y
+    aruco_tag_rotZ = aruco_pose.pose.orientation.z
+    aruco_tag_rotW = aruco_pose.pose.orientation.w
+
+    print("translation: ", aruco_tag_posX, aruco_tag_posY, aruco_tag_posZ)
+    print("rotation: ", aruco_tag_rotX, aruco_tag_rotY, aruco_tag_rotZ, aruco_tag_rotW)
+    control(aruco_tag_posX, aruco_tag_posY, aruco_tag_posZ, aruco_tag_rotX, aruco_tag_rotY, aruco_tag_rotZ, aruco_tag_rotW)
+
+def control(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in):
     """
     Main Script
     """
@@ -68,7 +116,7 @@ def control(x_in, y_in, z_in):
         while not rospy.is_shutdown():
             try:
                 goal = PoseStamped()
-                goal.header.frame_id = "/"
+                goal.header.frame_id = "base"
                 #x, y, and z position
                 goal.pose.position.x = x
                 goal.pose.position.y = y
@@ -94,7 +142,7 @@ def control(x_in, y_in, z_in):
                 break
 
     while not rospy.is_shutdown():
-        move_to_goal(x_in, y_in, z_in, control2, plannerLeft)
+        move_to_goal(x_in, y_in, z_in, control2, plannerLeft, [], wx_in, wy_in, wz_in, ww_in)
     # Set your goal positions here
         # move_to_goal(0.3,0.5,0,control2, plannerLeft)
     	# move_to_goal(0.47, -0.85, 0.07, control1, plannerRight)
