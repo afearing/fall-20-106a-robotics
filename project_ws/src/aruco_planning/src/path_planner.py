@@ -87,14 +87,17 @@ class PathPlanner(object):
         """
 
         self._group.set_pose_target(target)
+        # print("curr state: ", self._robot.get_current_state())
+        # print("end effector: ", self._group.get_end_effector_link())
+        # print("planning frame: ", self._group.get_planning_frame())
         self._group.set_start_state_to_current_state()
-
+        print("curr state: ", self._robot.get_current_state())
         constraints = Constraints()
         constraints.orientation_constraints = orientation_constraints
         self._group.set_path_constraints(constraints)
 
+        # print("curr pose: ", self._group.get_current_pose())
         plan = self._group.plan()
-
         return plan
 
     def execute_plan(self, plan):
