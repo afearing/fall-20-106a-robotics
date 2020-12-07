@@ -3,6 +3,7 @@
   <include file="$(find baxter_gazebo)/launch/baxter_world.launch">
   </include>
   <include file="$(find arucobaxter_gazebo)/launch/arucobaxter_mannequin.launch">
-    <arg name="x" value="1.0"/>
+    <arg name="x" value="1.2"/>
+    <arg name="yaw" value="3.14159"/>
   </include>
 </launch>
