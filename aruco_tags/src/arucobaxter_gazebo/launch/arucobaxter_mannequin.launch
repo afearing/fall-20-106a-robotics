@@ -1,5 +1,8 @@
 <launch>
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="1.0"/>
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
@@ -11,7 +14,7 @@
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="man_spawner" pkg="gazebo_ros" type="spawn_model"
-        args="-z 1.0 -unpause -urdf -model robot -param mannequin_description" respawn="false" output="screen" />
+        args="-x $(arg x) -y $(arg y) -z $(arg z) -unpause -urdf -model robot -param mannequin_description" respawn="false" output="screen" />
 
   <node pkg="robot_state_publisher" type="robot_state_publisher"  name="man_state_publisher">
     <param name="publish_frequency" type="double" value="30.0" />
