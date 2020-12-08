@@ -39,15 +39,15 @@ def fiducial_callback(fiducial_tfArray):
     tfBuffer1 = tf2_ros.Buffer()
     listener = tf2_ros.TransformListener(tfBuffer1)
 
-    br = tf2_ros.TransformBroadcaster()
-    rate2 = rospy.Rate(10.0)
-    while not rospy.is_shutdown():
-        br.sendTransform
+    # br = tf2_ros.TransformBroadcaster()
+    # rate2 = rospy.Rate(10.0)
+    # while not rospy.is_shutdown():
+    #     br.sendTransform
 
     vector3 = fiducial_tfArray.transforms[0].transform.translation
     quaternion = fiducial_tfArray.transforms[0].transform.rotation
     frame = fiducial_tfArray.header
-    print(frame)
+    # print(frame)
 
     camera_pose = PoseStamped()
     camera_pose.header.frame_id = "head_camera"
@@ -67,16 +67,16 @@ def fiducial_callback(fiducial_tfArray):
     camera_pose.pose.orientation.w = quaternion.w
 
     # # listener.waitForTransform()
-    trans1, trans2, rot = 0, 0, 0
-    aruco_pose = 0
-    rate = rospy.Rate(1)
-    while not rospy.is_shutdown(): 
-        try:
-            trans1 = tfBuffer1.lookup_transform("world", "head_camera", rospy.Time())
-        except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
-            rate.sleep()
-            continue
-        break
+    # trans1, trans2, rot = 0, 0, 0
+    # aruco_pose = 0
+    # rate = rospy.Rate(1)
+    # while not rospy.is_shutdown(): 
+    #     try:
+    #         trans1 = tfBuffer1.lookup_transform("world", "head_camera", rospy.Time())
+    #     except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
+    #         rate.sleep()
+    #         continue
+    #     break
     # while not rospy.is_shutdown(): 
     #     try:
     #         trans2 = tfBuffer1.lookup_transform("head_camera", "base", rospy.Time())
@@ -88,7 +88,7 @@ def fiducial_callback(fiducial_tfArray):
 #    [-0.9545,   -0.1790,   -0.0016],
 #    [-8.1999,   25.0806,    1.2777]])
 
-    print(trans1)
+    # print(trans1)
     # print(trans2)
     # trans1Rot = np.array([[ -0.0002172,  0.1789026,  0.9838668, -0.0001813],
     #                     [0.9999999,  0.0002172,  0.0001813, 0],
@@ -114,18 +114,18 @@ def fiducial_callback(fiducial_tfArray):
     #     break
     # trans1_mat = tf2_ros.transformations
     # print("transform: ", trans)
-    while not rospy.is_shutdown(): 
-        try:
-            aruco_pose = tf2_geometry_msgs.do_transform_pose(camera_pose, trans1)
-        except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
-            rate.sleep()
-            continue
-        break
+    # while not rospy.is_shutdown(): 
+    #     try:
+    #         aruco_pose = tf2_geometry_msgs.do_transform_pose(camera_pose, trans1)
+    #     except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
+    #         rate.sleep()
+    #         continue
+    #     break
     
-    print("pose: ", aruco_pose)
-    aruco_tag_posX = aruco_pose.pose.position.x 
-    aruco_tag_posY = aruco_pose.pose.position.y
-    aruco_tag_posZ = aruco_pose.pose.position.z 
+    # print("pose: ", aruco_pose)
+    # aruco_tag_posX = aruco_pose.pose.position.x 
+    # aruco_tag_posY = aruco_pose.pose.position.y
+    # aruco_tag_posZ = aruco_pose.pose.position.z 
 
     # aruco_tag_rotX = aruco_pose.pose.orientation.x
     # aruco_tag_rotY = aruco_pose.pose.orientation.y
@@ -134,9 +134,10 @@ def fiducial_callback(fiducial_tfArray):
 
     # print("translation: ", aruco_tag_posX, aruco_tag_posY, aruco_tag_posZ)
     # print("rotation: ", aruco_tag_rotX, aruco_tag_rotY, aruco_tag_rotZ, aruco_tag_rotW)
-    control(aruco_tag_posX, aruco_tag_posY, aruco_tag_posZ, 0, -1, 0, 0, frame)
+    # control(aruco_tag_posX, aruco_tag_posY, aruco_tag_posZ, 0, -1, 0, 0, frame)
     # control(vector3.x, vector3.y, vector3.z, 0, -1, 0, 0, frame)
     # control(vector3.x + 1.2,vector3.y + 0.34,vector3.z - 1,0,0,0,0,frame)
+    control(0,0,0,0,0,0,0,frame)
 
 def control(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in, header_id):
     """
@@ -168,8 +169,8 @@ def control(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in, header_id):
     control2 = Controller(Kp, Ki, Kd, Kw, Limb("left"))
 
     def move_to_goal(x, y, z, controller, planner, orien_const=[], or_x=0.0, or_y=-1.0, or_z=0.0, or_w=0.0):
-        print("x,y,z in: ", x_in, " ", y_in, " ", z_in)
         while not rospy.is_shutdown():
+            print("x,y,z in: ", x, " ", y, " ", z)
             try:
                 goal = PoseStamped()
                 goal.header.frame_id = "base"
@@ -196,14 +197,16 @@ def control(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in, header_id):
                 traceback.print_exc()
             else:
                 break
-    print("coords in: ", x_in, y_in, z_in)
+    # print("coords in: ", x_in, y_in, z_in)
     while not rospy.is_shutdown():
         # input1 = float(raw_input("Please enter 3 points: "))
         # input2 = float(raw_input("Please enter 3 points: "))
         # input3 = float(raw_input("Please enter 3 points: "))
         # move_to_goal(input1, input2, input3, control2, plannerLeft)
         # move_to_goal(-0.62,0.5,0.24,control2, plannerLeft)
-        move_to_goal(0.3,0.5,0,control2, plannerLeft)
+        # move_to_goal(0.3,0.5,0,control2, plannerLeft)
+        move_to_goal(1.1,0.5,0,control2, plannerLeft, [], -.5, 0.5, -.5, 0.5)
+        move_to_goal(1.1,0.5,.23,control2, plannerLeft, [], -.5, 0.5, -.5, 0.5)
         # move_to_goal(-0.2,0,0.78,control2, plannerLeft)
         # move_to_goal(0.56,0.23,0.87,control2, plannerLeft)
         # move_to_goal(0.56,-0.4,0.87,control1, plannerRight)
@@ -214,6 +217,8 @@ def control(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in, header_id):
         # move_to_goal(0.53, 0.2, 1.09, control2, plannerLeft)
         # move_to_goal(0.6, -0.1, 0.1, control1, plannerRight)
 
+        #manually humanBot
+        # move_to_goal(0.5, 0.5, 0.23, control1, plannerRight, [], 1, 0, 0, 0)
         #Set the left hand pos
     control1.shutdown()
     control2.shutdown()

@@ -51,6 +51,10 @@
 
   <xacro:macro name="arm" params="prefix reflect">
     <link name="${prefix}_arm">
+      <!-- <inertial>
+          <mass value="0.18" />
+          <inertia ixx="0.5" ixy="0.0" ixz="0.0" iyy="0.5" iyz="0.0" izz="0.5" />
+      </inertial> -->
       <visual>
         <geometry>
           <box size="${leglen} 0.1 0.2"/>
