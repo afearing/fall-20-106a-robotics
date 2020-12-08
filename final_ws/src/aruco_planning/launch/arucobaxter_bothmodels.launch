@@ -1,14 +1,13 @@
 <launch>
 
-  <include file="$(find baxter_gazebo)/launch/baxter_world.launch">
+  <include file="$(find aruco_planning)/launch/baxter_aruco.launch">
   </include>
-  <include file="$(find arucobaxter_gazebo)/launch/arucobaxter_mannequin.launch">
+  <include file="$(find aruco_planning)/launch/arucobaxter_mannequin.launch">
     <arg name="x" value="1.2"/>
     <arg name="yaw" value="3.14159"/>
   </include>
-  
   <include file="$(find aruco_detect)/launch/aruco_detect.launch">
-    <arg name="camera" value="/cameras/head_camera/"/>
+    <arg name="camera" value="cameras/head_camera"/>
     <arg name="fiducial_len" value="0.1"/>
     <arg name="dictionary" value="11"/>
   </include>
