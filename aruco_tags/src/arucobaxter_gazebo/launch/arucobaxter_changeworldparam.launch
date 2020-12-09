@@ -1,0 +1,7 @@
+<launch>
+
+  <include file="$(find baxter_gazebo)/launch/baxter_world.launch">
+  <param name="world_name" value="$(find arucobaxter_gazebo)/worlds/arucobaxter.world"/>
+  </include>
+
+</launch>
