@@ -40,3 +40,8 @@ Baxter cameras
 
 Baxter interact with human
 
+```
+rosrun tf tf_echo [reference_frame] [target_frame]
+rosrun tf tf_echo base left_hand
+rostopic echo /fiducial_transforms
+```

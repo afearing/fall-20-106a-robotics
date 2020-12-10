@@ -139,7 +139,7 @@
     <visual>
       <origin rpy="0 ${pi/2} 0" xyz="0.1 0 -0.5"/>
       <geometry>
-        <mesh filename="package://arucobaxter_gazebo/meshes/arucotag1.dae"/>
+        <mesh filename="package://mannequin/meshes/arucotag1.dae"/>
       </geometry>
     </visual>
   </link>
@@ -154,7 +154,7 @@
     <visual>
       <origin rpy="0 ${pi/2} 0" xyz="0.1 0 -0.1"/>
       <geometry>
-        <mesh filename="package://arucobaxter_gazebo/meshes/arucotag1.dae"/>
+        <mesh filename="package://mannequin/meshes/arucotag1.dae"/>
       </geometry>
     </visual>
   </link>
