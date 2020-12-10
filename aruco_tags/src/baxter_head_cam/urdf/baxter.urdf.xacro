@@ -6,7 +6,7 @@
   <xacro:arg name="right_electric_gripper" default="true"/>
   <xacro:arg name="left_electric_gripper" default="true"/>
   <!-- Baxter Base URDF -->
-  <xacro:include filename="$(find baxter_description)/urdf/baxter_base/baxter_base.urdf.xacro">
+  <xacro:include filename="$(find baxter_head_cam)/urdf/baxter_base/baxter_base.urdf.xacro">
     <xacro:arg name="gazebo" value="${gazebo}"/>
   </xacro:include>
 
