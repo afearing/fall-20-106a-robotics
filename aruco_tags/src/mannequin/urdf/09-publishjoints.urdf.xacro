@@ -47,6 +47,11 @@
 
   <xacro:macro name="arm" params="prefix reflect">
     <link name="${prefix}_arm">
+      <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="10"/>
+        <inertia ixx="0.308" ixy="0.0" ixz="0.0" iyy="0.04" iyz="0.0" izz="0.333"/>
+      </inertial>
       <visual>
         <geometry>
           <box size="${leglen} 0.1 0.2"/>
@@ -60,15 +65,16 @@
         </geometry>
         <origin xyz="0 0 -${leglen}" rpy="0 ${pi/2} 0"/>
       </collision>
-      <xacro:default_inertial mass="10"/>
+     
     </link>
 
     <joint name="base_to_${prefix}_arm" type="revolute">
       <axis xyz="1 0 0"/>
-      <limit effort="50.0" lower="0.0" upper="${reflect *3}" velocity="1"/>
+      <limit effort="50000.0" lower="0.0" upper="${reflect *3}" velocity="0.000001"/>
       <origin rpy="0 0 0" xyz="0 ${reflect*(width+.02)} 0.85" />
       <parent link="base_link"/>
       <child link="${prefix}_arm"/>   
+      <dynamics damping="0.05" friction="0"/>
     </joint>
 
     
@@ -170,6 +176,16 @@
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/</robotNamespace>
     </plugin>
+  </gazebo>
+
+
+    <gazebo reference="base_link">
+    <mu1>0</mu1>
+    <mu2>0</mu2>
+    <fdir1 value = "1 0 0"/>
+ <dynamics damping="0.7" friction="100.0" />
+    <material>Gazebo/Black</material>
+    <turnGravityOff>false</turnGravityOff>
   </gazebo>
 
 </robot>
