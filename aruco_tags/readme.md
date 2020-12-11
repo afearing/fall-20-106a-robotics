@@ -24,8 +24,7 @@ rosrun tf tf_echo [reference_frame] [target_frame]
 roslaunch arucobaxter_gazebo arucobaxter_bothmodels.launch 
 rosrun baxter_tools enable_robot.py -e
 rosrun baxter_interface joint_trajectory_action_server.py
-roslaunch baxter_moveit_config demo_baxter.launch right_electric_gripper:=
-true left_electric_gripper:=true
+roslaunch baxter_moveit_config demo_baxter.launch right_electric_gripper:=true left_electric_gripper:=true
 rosrun tf tf_echo base right_hand
 rostopic echo /fiducial_transforms
 ```
