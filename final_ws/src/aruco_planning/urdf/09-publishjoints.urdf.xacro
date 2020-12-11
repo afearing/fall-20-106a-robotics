@@ -8,6 +8,7 @@
   <xacro:property name="baselen" value="0.4" />
   <xacro:property name="wheeldiam" value="0.07" />
   <xacro:property name="pi" value="3.1415" />
+  <xacro:property name="ped_height" value="0.8" />
 
   <material name="blue">
     <color rgba="0 0 0.8 1"/>
@@ -33,7 +34,7 @@
       <geometry>
         <cylinder radius="${width}" length="${bodylen}"/>
       </geometry>
-      <origin xyz="0 0 0.6"/>
+      <origin xyz="0 0 ${0.6+ped_height}"/>
       <material name="blue"/>
     </visual>
     <collision>
@@ -63,7 +64,7 @@
         <geometry>
           <box size="${leglen/2} 0.1 0.2"/>
         </geometry>
-        <origin xyz="0 0 -${leglen}" rpy="0 ${pi/2} 0"/>
+        <origin xyz="0 0 -${leglen+ped_height}" rpy="0 ${pi/2} 0"/>
       </collision>
      
     </link>
@@ -71,10 +72,10 @@
     <joint name="base_to_${prefix}_arm" type="revolute">
       <axis xyz="1 0 0"/>
       <limit effort="50000.0" lower="0.0" upper="${reflect *3}" velocity="0.000001"/>
-      <origin rpy="0 0 0" xyz="0 ${reflect*(width+.02)} 0.85" />
+      <origin rpy="0 0 0" xyz="0 ${reflect*(width+.02)} ${0.85+ped_height}" />
       <parent link="base_link"/>
       <child link="${prefix}_arm"/>   
-      <dynamics damping="0.05" friction="0"/>
+      <dynamics damping="0.1" friction="0"/>
     </joint>
 
     
@@ -106,7 +107,7 @@
     <joint name="base_to_${prefix}_leg" type="fixed">
       <parent link="base_link"/>
       <child link="${prefix}_leg"/>
-      <origin xyz="0 ${reflect*0.1} 0.25" />
+      <origin xyz="0 ${reflect*0.1} ${0.25+ped_height}" />
     </joint>
 
     
@@ -136,14 +137,14 @@
     <parent link="base_link"/>
     <child link="head"/>
     <axis xyz="0 0 1"/>
-    <origin xyz="0 0 1.1"/>
+    <origin xyz="0 0 ${1.1+ped_height}"/>
   </joint>
 
 
 
   <link name="aruco1">
     <visual>
-      <origin rpy="0 ${pi/2} 0" xyz="0.1 0 -0.5"/>
+      <origin rpy="0 ${pi/2} 0" xyz="0.1 0 ${-0.5}"/>
       <geometry>
         <mesh filename="package://urdf_tutorial/meshes/arucotag1.dae"/>
       </geometry>
@@ -156,7 +157,30 @@
   </joint>
 
 
-   <link name="aruco2">
+    <link name="pedistal">
+      <visual>
+        <geometry>
+          <box size="0.8 0.8 0.8"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.5 0.5 ${ped_height}"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
+      </collision>
+      <xacro:default_inertial mass="10"/>
+    </link>
+
+    <joint name="leg_pedistal" type="fixed">
+      <parent link="base_link"/>
+      <child link="pedistal"/>
+      <origin xyz="0 0 0" />
+    </joint>
+
+<!--    <link name="aruco2">
     <visual>
       <origin rpy="0 ${pi/2} 0" xyz="0.1 0 -0.1"/>
       <geometry>
@@ -169,7 +193,7 @@
     <parent link="left_arm"/>
     <child link="aruco2"/>
   </joint>
-
+ -->
 
   <!-- Gazebo plugin for ROS Control -->
   <gazebo>
