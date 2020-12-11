@@ -1,0 +1,2 @@
+aruco_planning:fwd_kinematics:ik:planning
+-DCATKIN_DEVEL_PREFIX=/home/yalshinnawi/fall-20-106a-robotics/project_ws/devel -DCMAKE_INSTALL_PREFIX=/home/yalshinnawi/fall-20-106a-robotics/project_ws/install -G Unix Makefiles

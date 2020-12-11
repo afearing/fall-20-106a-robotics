@@ -1,0 +1,8 @@
+prefix=/home/yalshinnawi/fall-20-106a-robotics/project_ws/devel
+
+Name: fwd_kinematics
+Description: Description of fwd_kinematics
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

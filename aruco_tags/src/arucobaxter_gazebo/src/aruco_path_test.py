@@ -28,14 +28,15 @@ import tf2_geometry_msgs
 
 # Callback function to subscribe to images
 def fiducial_callback(fiducial_tfArray):
-    tfBuffer1 = tf2_ros.Buffer()
-    listener = tf2_ros.TransformListener(tfBuffer1)
+    # tfBuffer1 = tf2_ros.Buffer()
+    # listener = tf2_ros.TransformListener(tfBuffer1)
 
-    vector3 = fiducial_tfArray.transforms[0].transform.translation
-    quaternion = fiducial_tfArray.transforms[0].transform.rotation
-    frame = fiducial_tfArray.header
+    # vector3 = fiducial_tfArray.transforms[0].transform.translation
+    # quaternion = fiducial_tfArray.transforms[0].transform.rotation
+    # frame = fiducial_tfArray.header
 
-    control(vector3.x, vector3.y, vector3.z, -.5, 0.5, -.5, 0.5)
+    # control(vector3.x, vector3.y, vector3.z, -.5, 0.5, -.5, 0.5)
+    control(0,0,0,0,0,0,0)
 
 def control(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in):
     """
@@ -83,8 +84,11 @@ def control(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in):
         # input3 = float(raw_input("Please enter 3 points: "))
         # move_to_goal(input1, input2, input3, control2, plannerLeft)
         # move_to_goal(-0.62,0.5,0.24,control2, plannerLeft)
-        # move_to_goal(0.3,0.5,0,control2, plannerLeft)
-        move_to_goal(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in)
+        # move_to_goal(0.3,0.5, 0, 0, 0, 0, 0, plannerLeft)
+        # move_to_goal(0.18,0.41, -0.71, -.5, 0.5, -.5, 0.5, plannerLeft)
+        # move_to_goal(0.1816,0.41372, -0.71166, -.5, 0.5, -.5, 0.5, plannerLeft)
+        move_to_goal(0.994176,-0.073172, -0.016992, -.5, 0.5, -.5, 0.5, plannerRight)
+        # move_to_goal(x_in, y_in, z_in, wx_in, wy_in, wz_in, ww_in)
         # move_to_goal(1.1,0.5,0,control2, plannerLeft, [], -.5, 0.5, -.5, 0.5)
         # move_to_goal(1.1,0.5,.23,control2, plannerLeft, [], -.5, 0.5, -.5, 0.5)
         # move_to_goal(-0.2,0,0.78,control2, plannerLeft)

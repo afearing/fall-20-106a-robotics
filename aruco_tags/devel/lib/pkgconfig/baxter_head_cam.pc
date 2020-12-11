@@ -1,0 +1,8 @@
+prefix=/home/yalshinnawi/fall-20-106a-robotics/aruco_tags/devel
+
+Name: baxter_head_cam
+Description: Description of baxter_head_cam
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,2 @@
+aruco_planning
+-DCATKIN_DEVEL_PREFIX=/home/yalshinnawi/fall-20-106a-robotics/final_ws/devel -DCMAKE_INSTALL_PREFIX=/home/yalshinnawi/fall-20-106a-robotics/final_ws/install -G Unix Makefiles

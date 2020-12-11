@@ -1,0 +1,8 @@
+prefix=/home/yalshinnawi/fall-20-106a-robotics/aruco_tags/devel
+
+Name: arucobaxter_gazebo
+Description: Description of arucobaxter_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

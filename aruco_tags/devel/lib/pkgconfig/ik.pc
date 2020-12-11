@@ -1,0 +1,8 @@
+prefix=/home/yalshinnawi/fall-20-106a-robotics/aruco_tags/devel
+
+Name: ik
+Description: Description of ik
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

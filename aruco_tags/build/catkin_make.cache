@@ -1,0 +1,2 @@
+arucobaxter_gazebo:baxter_head_cam:ik:ik_aruco:mannequin
+-DCATKIN_DEVEL_PREFIX=/home/yalshinnawi/fall-20-106a-robotics/aruco_tags/devel -DCMAKE_INSTALL_PREFIX=/home/yalshinnawi/fall-20-106a-robotics/aruco_tags/install -G Unix Makefiles
