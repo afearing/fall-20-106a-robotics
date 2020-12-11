@@ -6,6 +6,10 @@
     <arg name="x" value="1.2"/>
     <arg name="yaw" value="3.14159"/>
   </include>
+  <include file="$(find mannequin)/launch/arucobaxter_mannequin.launch">
+    <arg name="x" value="1.2"/>
+    <arg name="yaw" value="3.14159"/>
+  </include>
   
   <include file="$(find aruco_detect)/launch/aruco_detect.launch">
     <arg name="camera" value="/cameras/head_camera/"/>
