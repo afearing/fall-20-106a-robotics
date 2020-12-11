@@ -6,6 +6,8 @@
     <arg name="x" value="1.0"/>
     <arg name="yaw" value="3.14159"/>
   </include>
+
+ 
   
   <include file="$(find aruco_detect)/launch/aruco_detect.launch">
     <arg name="camera" value="cameras/head_camera"/>
