@@ -155,7 +155,7 @@
     <child link="aruco1"/>
   </joint>
 
-
+<!-- 
    <link name="aruco2">
     <visual>
       <origin rpy="0 ${pi/2} 0" xyz="0.1 0 -0.1"/>
@@ -163,12 +163,12 @@
         <mesh filename="package://mannequin/meshes/arucotag1.dae"/>
       </geometry>
     </visual>
-  </link>
+  </link> -->
 
-  <joint name="aruco2_joint" type="fixed">
+  <!-- <joint name="aruco2_joint" type="fixed">
     <parent link="left_arm"/>
     <child link="aruco2"/>
-  </joint>
+  </joint> -->
 
 
   <!-- Gazebo plugin for ROS Control -->
